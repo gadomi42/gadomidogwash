@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gadomi Dog Wash · Station de lavage pour chien à Feurs</title>
+<meta name="description" content="Une station de lavage pour chien en libre-service ouvre à Feurs au printemps 2027. Inscrivez-vous pour être prévenu de l'ouverture et profiter du premier lavage à moitié prix.">
+<meta property="og:title" content="Gadomi Dog Wash · bientôt à Feurs">
+<meta property="og:description" content="Lavez et séchez votre chien vous-même, sans rendez-vous, 7 jours sur 7. Inscrivez-vous pour être prévenu de l'ouverture.">
+<link rel="icon" href="assets/logo-dogwash-dark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap">
+<style>
+:root{
+  --teal:#16302E; --teal-2:#1F413E; --teal-line:#2C5652;
+  --yel:#F5B82E; --yel-h:#FFC74A; --yel-ink:#1B1606;
+  --foam:#FFFFFF; --mist:#E3E8E6; --paper:#FFFFFF; --stone:#E2E0DF; --stone-2:#D6D3D1;
+  --ink:#16302E; --txt:#3A4644; --soft:#5B6B69; --err:#B3261E;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--txt);font-family:"Outfit",system-ui,sans-serif;font-size:17px;line-height:1.55}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--yel);outline-offset:3px;border-radius:6px}
+
+/* Hero */
+.hero{position:relative;background:linear-gradient(180deg,#E9E7E6 0%,var(--stone) 60%,var(--stone-2) 100%);color:var(--ink);overflow:hidden}
+.hero-in{max-width:1240px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center;min-height:min(100vh,880px)}
+.hero-text{padding:48px 0}
+.logo{width:112px;height:auto}
+.hero h1{margin:28px 0 0;font-weight:600;font-size:clamp(34px,4.6vw,58px);line-height:1.04;letter-spacing:-.015em;max-width:14ch;color:var(--ink)}
+.hero .lead{margin:18px 0 0;max-width:44ch;font-size:clamp(17px,1.5vw,19px);color:var(--txt)}
+.facts{list-style:none;margin:24px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.facts li{background:rgba(255,255,255,.6);border-radius:999px;padding:7px 16px;font-size:15px;color:var(--ink)}
+.facts b{font-weight:600}
+.actions{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin-top:32px}
+.cta{display:inline-block;background:var(--yel);color:var(--yel-ink);font-weight:600;font-size:18px;text-decoration:none;border-radius:999px;padding:15px 30px;transition:background-color .15s}
+.cta:hover{background:var(--yel-h)}
+.cta small{display:block;font-weight:400;font-size:13.5px;opacity:.8}
+.more{color:var(--ink);font-weight:500;text-decoration:none;border-bottom:1.5px solid currentColor;padding-bottom:1px}
+
+/* Photo reel: two columns drifting upward, nudged further by page scroll */
+.reel{position:relative;height:min(100vh,880px);display:grid;grid-template-columns:1fr 1fr;gap:16px;overflow:hidden;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 9%,#000 91%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 9%,#000 91%,transparent 100%)}
+.reel .col{will-change:transform}
+.reel .col:nth-child(2){margin-top:-140px}
+.track{animation:reel-up 70s linear infinite}
+.reel .col:nth-child(2) .track{animation-duration:88s}
+.tile{margin:0 0 16px}
+.tile img{width:100%;height:auto;aspect-ratio:456/662;object-fit:cover;border-radius:18px;background:#d9d6d4}
+@keyframes reel-up{to{transform:translateY(-50%)}}
+@media (prefers-reduced-motion:reduce){.track{animation:none}}
+
+/* Sign-up section */
+.signup{background:var(--paper)}
+.signup-in{max-width:1120px;margin:0 auto;padding:88px 24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.signup-in .section-title{max-width:16ch}
+.signup-in p{max-width:42ch}
+
+/* Sign-up card */
+.card{background:var(--foam);color:var(--txt);border-radius:22px;padding:28px 28px 24px;box-shadow:0 18px 50px rgba(40,36,34,.16);border:1px solid #ECEAE9}
+.offer{display:flex;gap:16px;align-items:center;background:var(--yel);color:var(--yel-ink);border-radius:14px;padding:14px 18px;margin:-6px 0 22px}
+.offer .pct{font-size:34px;font-weight:700;line-height:1;white-space:nowrap}
+.offer p{margin:0;font-size:15.5px;line-height:1.35}
+.card h2{margin:0;font-size:23px;font-weight:600;color:var(--ink);line-height:1.2}
+.card .sub{margin:6px 0 18px;font-size:15.5px;color:var(--soft)}
+.f{margin-top:14px}
+.f label,.f legend{display:block;font-size:15px;font-weight:500;color:var(--ink);margin-bottom:6px;padding:0}
+.f input[type=text],.f input[type=email]{width:100%;font:inherit;font-size:16px;color:var(--ink);padding:12px 14px;border:1.5px solid #C9D3D1;border-radius:10px;background:#fff}
+.f input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(245,184,46,.45)}
+.f.bad input{border-color:var(--err)}
+fieldset.f{border:0;margin:14px 0 0;padding:0}
+.sizes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.sizes label{display:flex;flex-direction:column;align-items:center;gap:2px;border:1.5px solid #C9D3D1;border-radius:10px;padding:10px 6px;cursor:pointer;font-weight:500;font-size:15px;color:var(--ink);margin:0;text-align:center}
+.sizes label small{font-weight:400;color:var(--soft);font-size:12.5px}
+.sizes input{position:absolute;opacity:0;pointer-events:none}
+.sizes label:has(input:checked){border-color:var(--teal);background:#E8F0EE;box-shadow:inset 0 0 0 1px var(--teal)}
+.sizes label:has(input:focus-visible){outline:3px solid var(--yel);outline-offset:2px}
+.consent{display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:14px;color:var(--soft);line-height:1.4}
+.consent input{margin-top:3px;width:18px;height:18px;accent-color:var(--teal);flex:none}
+.hp{position:absolute;left:-9999px}
+.btn{margin-top:20px;width:100%;font:inherit;font-size:18px;font-weight:600;color:var(--yel-ink);background:var(--yel);border:0;border-radius:999px;padding:15px 22px;cursor:pointer;transition:background-color .15s}
+.btn:hover{background:var(--yel-h)}
+.btn:disabled{opacity:.6;cursor:wait}
+.msg{margin:12px 0 0;font-size:14.5px;min-height:1px}
+.msg.err{color:var(--err)}
+.done{display:none;text-align:center;padding:18px 4px}
+.done h2{font-size:24px}
+.done p{margin:10px 0 0;color:var(--soft)}
+
+/* Steps */
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.steps{padding-top:88px;padding-bottom:24px}
+.section-title{margin:0;font-size:clamp(26px,3vw,36px);font-weight:500;color:var(--ink);line-height:1.15;max-width:22ch}
+.steps ol{list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding-top:8px}
+.steps svg{width:96px;height:96px;color:var(--teal)}
+.steps h3{margin:18px 0 0;font-size:21px;font-weight:600;color:var(--ink);display:flex;gap:10px;align-items:baseline}
+.steps h3::before{content:counter(s);font-size:15px;font-weight:600;color:var(--yel-ink);background:var(--yel);width:26px;height:26px;border-radius:50%;display:inline-grid;place-items:center;flex:none;transform:translateY(-2px)}
+.steps p{margin:8px 0 0;max-width:34ch}
+
+/* Details */
+.details{padding-top:64px;padding-bottom:88px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:36px}
+.list{list-style:none;margin:0;padding:0;border-top:1px solid #D9DEDC}
+.list li{display:flex;justify-content:space-between;gap:20px;padding:15px 0;border-bottom:1px solid #D9DEDC}
+.list span{color:var(--soft)}
+.list b{color:var(--ink);font-weight:500;text-align:right}
+.why p{margin:0 0 14px;max-width:46ch}
+.why p:last-child{margin-bottom:0}
+.why b{color:var(--ink);font-weight:600}
+
+/* Gadomi42 clients */
+.band{background:var(--teal-2);color:#D5DEDC}
+.band-in{max-width:1120px;margin:0 auto;padding:40px 24px;display:flex;gap:28px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.band p{margin:0;max-width:60ch}
+.band b{color:var(--foam);font-weight:600}
+.band a.link{color:var(--yel);font-weight:600;text-decoration:none;border-bottom:1.5px solid currentColor;padding-bottom:1px}
+
+footer{background:var(--teal);color:#A9BCB8;font-size:14.5px}
+.foot{max-width:1120px;margin:0 auto;padding:28px 24px;display:flex;gap:12px 28px;flex-wrap:wrap;justify-content:space-between}
+footer a{color:#D5DEDC;text-decoration:none}
+footer a:hover{color:var(--foam)}
+
+@media (max-width:900px){
+  .hero-in{grid-template-columns:1fr;gap:8px;padding:0 18px 36px;min-height:0}
+  .hero-text{padding:28px 0 8px}
+  .reel{height:440px;gap:12px}
+  .reel .col:nth-child(2){margin-top:-90px}
+  .tile{margin-bottom:12px}
+  .logo{width:92px}
+  .hero h1{margin-top:22px}
+  .signup-in{grid-template-columns:1fr;gap:28px;padding:56px 18px}
+  .wrap,.band-in,.foot{padding-left:18px;padding-right:18px}
+  .steps{padding-top:64px}
+  .steps ol{grid-template-columns:1fr;gap:36px}
+  .steps li{display:grid;grid-template-columns:72px 1fr;gap:0 18px;align-items:start}
+  .steps svg{width:72px;height:72px;grid-row:span 2}
+  .steps h3{margin-top:4px}
+  .grid{grid-template-columns:1fr;gap:40px}
+  .details{padding-top:48px;padding-bottom:64px}
+}
+@media (max-width:420px){
+  .card{padding:24px 18px 22px;border-radius:18px}
+  .offer .pct{font-size:28px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="hero-text">
+      <img class="logo" src="assets/logo-dogwash-dark.png" alt="Gadomi 42 Dog Wash" width="452" height="496">
+      <h1>Une station pour laver votre chien, bientôt à Feurs</h1>
+      <p class="lead">Lavez et séchez votre chien vous-même, sans rendez-vous et sans salir la maison. Eau chaude, shampoing, séchoir professionnel : tout est dans la machine.</p>
+      <ul class="facts">
+        <li>Ouverture <b>printemps 2027</b></li>
+        <li>Ouvert <b>7 jours sur 7</b></li>
+        <li>Environ <b>12 €</b> le lavage</li>
+      </ul>
+      <div class="actions">
+        <a class="cta" href="#inscription">M'inscrire<small>−50 % sur le premier lavage</small></a>
+        <a class="more" href="#t-steps">Comment ça marche</a>
+      </div>
+    </div>
+
+    <div class="reel" aria-label="Photos de la station et de chiens au lavage" role="img">
+      <div class="col" data-speed="0.35">
+        <div class="track">
+          <figure class="tile"><img src="assets/photo-1.jpg" alt="" width="456" height="662" loading="eager"></figure>
+          <figure class="tile"><img src="assets/photo-3.jpg" alt="" width="456" height="662" loading="eager"></figure>
+          <figure class="tile"><img src="assets/photo-2.jpg" alt="" width="456" height="662" loading="lazy"></figure>
+          <figure class="tile"><img src="assets/photo-4.jpg" alt="" width="456" height="662" loading="lazy"></figure>
+          <figure class="tile"><img src="assets/photo-5.jpg" alt="" width="456" height="662" loading="lazy"></figure>
+          <figure class="tile"><img src="assets/photo-1.jpg" alt="" width="456" height="662" loading="eager"></figure>
+          <figure class="tile"><img src="assets/photo-3.jpg" alt="" width="456" height="662" loading="eager"></figure>
+          <figure class="tile"><img src="assets/photo-2.jpg" alt="" width="456" height="662" loading="lazy"></figure>
+          <figure class="tile"><img src="assets/photo-4.jpg" alt="" width="456" height="662" loading="lazy"></figure>
+          <figure class="tile"><img src="assets/photo-5.jpg" alt="" width="456" height="662" loading="lazy"></figure>
+        </div>
+      </div>
+      <div class="col" data-speed="0.12">
+        <div class="track">
+          <figure class="tile"><img src="assets/photo-4.jpg" alt="" width="456" height="662" loading="eager"></figure>
+          <figure class="tile"><img src="assets/photo-2.jpg" alt="" width="456" height="662" loading="eager"></figure>
+          <figure class="tile"><img src="assets/photo-5.jpg" alt="" width="456" height="662" loading="lazy"></figure>
+          <figure class="tile"><img src="assets/photo-1.jpg" alt="" width="456" height="662" loading="lazy"></figure>
+          <figure class="tile"><img src="assets/photo-3.jpg" alt="" width="456" height="662" loading="lazy"></figure>
+          <figure class="tile"><img src="assets/photo-4.jpg" alt="" width="456" height="662" loading="eager"></figure>
+          <figure class="tile"><img src="assets/photo-2.jpg" alt="" width="456" height="662" loading="eager"></figure>
+          <figure class="tile"><img src="assets/photo-5.jpg" alt="" width="456" height="662" loading="lazy"></figure>
+          <figure class="tile"><img src="assets/photo-1.jpg" alt="" width="456" height="662" loading="lazy"></figure>
+          <figure class="tile"><img src="assets/photo-3.jpg" alt="" width="456" height="662" loading="lazy"></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="signup" aria-labelledby="t-signup">
+  <div class="signup-in">
+    <div>
+      <h2 class="section-title" id="t-signup">Soyez parmi les premiers à l'essayer</h2>
+      <p>Laissez votre e-mail : vous serez prévenu dès l'ouverture de la station à Feurs, avec votre premier lavage à moitié prix.</p>
+    </div>
+    <div class="card" id="inscription">
+      <form id="form" novalidate>
+        <div class="offer">
+          <div class="pct">−50&nbsp;%</div>
+          <p>Sur votre premier lavage si vous vous inscrivez avant l'ouverture.</p>
+        </div>
+        <h2>Être prévenu de l'ouverture</h2>
+        <p class="sub">Un seul message à l'ouverture, avec votre bon de réduction.</p>
+
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="f">
+          <label for="prenom">Prénom</label>
+          <input type="text" id="prenom" name="prenom" autocomplete="given-name" required>
+        </div>
+        <div class="f">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" autocomplete="email" inputmode="email" required>
+        </div>
+        <div class="f">
+          <label for="commune">Commune</label>
+          <input type="text" id="commune" name="commune" autocomplete="address-level2" placeholder="Ex. : Feurs" required>
+        </div>
+        <fieldset class="f">
+          <legend>Taille de votre chien</legend>
+          <div class="sizes">
+            <label><input type="radio" name="taille" value="Petit">Petit<small>moins de 10 kg</small></label>
+            <label><input type="radio" name="taille" value="Moyen">Moyen<small>10 à 25 kg</small></label>
+            <label><input type="radio" name="taille" value="Grand">Grand<small>plus de 25 kg</small></label>
+          </div>
+        </fieldset>
+        <label class="consent"><input type="checkbox" id="ok" required>J'accepte que Gadomi Dog Wash garde mon e-mail pour me prévenir de l'ouverture. Rien d'autre, et désinscription sur simple demande.</label>
+
+        <button class="btn" id="btn" type="submit">M'inscrire</button>
+        <p class="msg" id="msg" role="status" aria-live="polite"></p>
+      </form>
+      <div class="done" id="done" tabindex="-1">
+        <h2>C'est noté, merci !</h2>
+        <p>Vous recevrez un e-mail à l'ouverture de la station, avec votre premier lavage à moitié prix.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <section class="steps wrap" aria-labelledby="t-steps">
+    <h2 class="section-title" id="t-steps">Un chien propre et sec en une vingtaine de minutes</h2>
+    <ol>
+      <li>
+        <svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 52h68v18a8 8 0 0 1-8 8H22a8 8 0 0 1-8-8V52z"/><path d="M20 78l-3 8M76 78l3 8"/>
+          <path d="M60 14h10a6 6 0 0 1 6 6v6"/><path d="M70 30h12l-3 6H73z"/><path d="M74 40v4M78 42v4M82 40v4"/>
+          <circle cx="30" cy="42" r="4"/><circle cx="40" cy="36" r="3"/><circle cx="46" cy="44" r="5"/>
+        </svg>
+        <h3>Installez et lavez</h3>
+        <p>Installez votre chien dans le bac, à bonne hauteur. Choisissez le programme à l'écran : eau tiède, shampoing, rinçage.</p>
+      </li>
+      <li>
+        <svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 30h30a14 14 0 0 1 0 28H22z"/><path d="M30 58v18h12l-2-18"/>
+          <path d="M66 36h18M66 44h22M66 52h18"/><path d="M14 38v12"/>
+        </svg>
+        <h3>Séchez</h3>
+        <p>Le séchoir professionnel sèche même les poils longs. Vous réglez la puissance, et un bouton met tout en pause si votre chien a besoin d'une minute.</p>
+      </li>
+      <li>
+        <svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M30 70c-8-2-12-10-10-18 2-6 8-9 14-8l4-14c2-6 8-8 12-6l6 4 10-2-2 8 4 6c2 4 0 8-4 9l-10 3-4 14c-2 6-8 8-14 6z"/>
+          <circle cx="58" cy="34" r="1.5" fill="currentColor"/>
+          <path d="M14 30l4 4M18 24l2 6M78 66l6 2M74 74l4 4"/>
+        </svg>
+        <h3>Repartez</h3>
+        <p>Le bac se désinfecte automatiquement entre chaque chien. Chez vous, rien à nettoyer : pas de poils dans la baignoire.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="details wrap" aria-labelledby="t-details">
+    <h2 class="section-title" id="t-details">Ce que vous trouverez dans la station</h2>
+    <div class="grid">
+      <ul class="list">
+        <li><span>Lavage</span><b>Eau tiède réglable, douchette</b></li>
+        <li><span>Produits inclus</span><b>Shampoing, après-shampoing, antiparasitaire</b></li>
+        <li><span>Séchage</span><b>Séchoir professionnel haute vitesse</b></li>
+        <li><span>Hygiène</span><b>Désinfection du bac après chaque lavage</b></li>
+        <li><span>Paiement</span><b>Carte bancaire et sans contact</b></li>
+        <li><span>Horaires</span><b>7 jours sur 7, sans rendez-vous</b></li>
+      </ul>
+      <div class="why">
+        <p><b>Pour les grands chiens</b>, qui ne rentrent pas dans la baignoire et mettent des poils partout.</p>
+        <p><b>Au retour d'une balade</b> dans les monts du Forez, d'une partie de chasse ou d'un bain dans la Loire.</p>
+        <p><b>Pour ceux qui ne peuvent plus porter leur chien</b> : le bac est à bonne hauteur, on ne se baisse pas.</p>
+        <p><b>Entre deux toilettages</b> : un bain d'entretien, rapide et bien moins cher.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-label="Clients Gadomi42">
+    <div class="band-in">
+      <p>Vous faites déjà garder votre animal par <b>Gadomi42</b> ? Votre <b>premier lavage sera offert</b> à l'ouverture.</p>
+      <a class="link" href="#inscription">Je m'inscris</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot">
+    <span>Gadomi Dog Wash, Feurs (42110). Un service de Gadomi42, garde d'animaux à domicile.</span>
+    <a href="mailto:gadomi42@gmail.com">gadomi42@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Reel follows the page scroll (each column at its own speed)
+  var cols = document.querySelectorAll('.reel .col');
+  if (cols.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var ticking = false;
+    var onScroll = function () {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(function () {
+        var y = window.scrollY;
+        cols.forEach(function (c) { c.style.transform = 'translateY(' + (-y * parseFloat(c.dataset.speed)) + 'px)'; });
+        ticking = false;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  }
+
+  var ACCESS_KEY = "e353c4aa-fe0d-4764-bfd7-7f859975c4a9";
+  var ENDPOINT = "https://api.web3forms.com/submit";
+  var form = document.getElementById("form"), btn = document.getElementById("btn"), msg = document.getElementById("msg");
+
+  form.addEventListener("input", function (e) { var f = e.target.closest(".f"); if (f) f.classList.remove("bad"); });
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    msg.textContent = ""; msg.className = "msg";
+    var missing = [];
+    ["prenom", "email", "commune"].forEach(function (id) {
+      var el = document.getElementById(id), bad = !el.value.trim() || (id === "email" && !/^\S+@\S+\.\S+$/.test(el.value.trim()));
+      el.closest(".f").classList.toggle("bad", bad);
+      if (bad) missing.push(el);
+    });
+    if (missing.length) { msg.textContent = "Indiquez votre prénom, un e-mail valide et votre commune."; msg.className = "msg err"; missing[0].focus(); return; }
+    if (!document.getElementById("ok").checked) { msg.textContent = "Cochez la case d'accord pour qu'on puisse vous prévenir."; msg.className = "msg err"; return; }
+
+    var taille = form.querySelector("input[name=taille]:checked");
+    var data = {
+      access_key: ACCESS_KEY,
+      subject: "Inscription Dog Wash : " + document.getElementById("prenom").value.trim() + " (" + document.getElementById("commune").value.trim() + ")",
+      from_name: "Gadomi Dog Wash · page d'inscription",
+      "Type": "Inscription ouverture Dog Wash",
+      "Prénom": document.getElementById("prenom").value.trim(),
+      "email": document.getElementById("email").value.trim(),
+      "Commune": document.getElementById("commune").value.trim(),
+      "Taille du chien": taille ? taille.value : "—"
+    };
+    if (form.botcheck.checked) data.botcheck = true;
+
+    btn.disabled = true; msg.textContent = "Envoi en cours…";
+    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(data) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return r.ok && j.success !== false; }); })
+      .then(function (ok) {
+        if (!ok) throw new Error();
+        form.style.display = "none";
+        var d = document.getElementById("done"); d.style.display = "block"; d.focus();
+      })
+      .catch(function () {
+        btn.disabled = false;
+        msg.textContent = "L'inscription n'a pas été envoyée. Vérifiez votre connexion et réessayez, ou écrivez à gadomi42@gmail.com.";
+        msg.className = "msg err";
+      });
+  });
+})();
+</script>
+</body>
+</html>
