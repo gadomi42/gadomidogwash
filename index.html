@@ -201,7 +201,14 @@ footer a:hover{color:var(--foam)}
 .sticker{position:absolute;right:-22px;top:-26px;width:104px;height:104px;border-radius:50%;background:var(--yel);color:var(--yel-ink);
   display:grid;place-items:center;font-weight:800;font-size:26px;letter-spacing:-.02em;transform:rotate(10deg);box-shadow:0 10px 24px rgba(0,0,0,.25)}
 .signup .card{border:1px solid #ECEAE9;box-shadow:0 24px 60px rgba(40,36,34,.14);padding:34px 32px 28px}
-.signup .card h2{font-size:28px;font-weight:700}
+.signup .card{position:relative;padding-top:0;overflow:hidden}
+.signup .card form{padding-top:0}
+.card-head{margin:0 -32px 24px;padding:30px 32px 22px;border-bottom:1px solid #ECEAE9;display:flex;align-items:center;gap:16px}
+.card-head .pen{flex:none;width:52px;height:52px;border-radius:50%;background:var(--ink);display:grid;place-items:center}
+.card-head .pen svg{width:26px;height:26px;color:var(--yel)}
+.signup .card .card-head h2{margin:0;font-size:clamp(30px,3vw,38px);font-weight:800;letter-spacing:-.02em;line-height:1;color:var(--ink)}
+.signup .card .card-head .sub{margin:6px 0 0;font-size:15.5px;color:var(--soft)}
+@media (max-width:420px){.card-head{margin:0 -18px 20px;padding:24px 18px 18px}}
 .signup .btn{font-size:19px;font-weight:700;padding:17px 22px;box-shadow:0 10px 22px rgba(184,134,0,.3)}
 @media (max-width:900px){.signup-in{padding:64px 18px;gap:36px}.pitch-photo{max-width:none}.sticker{right:-6px;width:88px;height:88px;font-size:22px}}
 </style>
@@ -275,8 +282,9 @@ footer a:hover{color:var(--foam)}
     </div>
     <div class="card" id="inscription">
       <form id="form" novalidate>
-        <h2>Je m'inscris</h2>
-        <p class="sub">30 secondes, et votre bon −50 % est réservé.</p>
+        <div class="card-head">
+          <div><h2>Je m'inscris</h2><p class="sub">30 secondes, et votre bon −50 % est réservé.</p></div>
+        </div>
 
         <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 
