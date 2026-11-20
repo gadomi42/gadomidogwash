@@ -331,7 +331,7 @@ footer a:hover{color:var(--foam)}
       <div class="done" id="done" tabindex="-1">
         <div class="done-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>
         <h2>C'est noté, <span id="done-name">merci</span> !</h2>
-        <p class="done-lead">Votre réduction est réservée.</p>
+        <p class="done-lead">Votre réduction est réservée. Un e&#8209;mail de confirmation vient de vous être envoyé.</p>
         <div class="coupon">
           <div class="coupon-pct">−50&nbsp;%</div>
           <div class="coupon-txt"><b>Votre premier lavage</b><span>Gadomi Dog Wash · Feurs</span></div>
@@ -433,6 +433,7 @@ footer a:hover{color:var(--foam)}
 
   var ACCESS_KEY = "e353c4aa-fe0d-4764-bfd7-7f859975c4a9";
   var ENDPOINT = "https://api.web3forms.com/submit";
+  var CONFIRM_URL = "https://script.google.com/macros/s/AKfycbygUDOiwaLu8BShoBFkIR1r9pckQ-j9xXf9V6B6KGRKIti1mooue_u7hE9vrMIZ2N28/exec";
   var form = document.getElementById("form"), btn = document.getElementById("btn"), msg = document.getElementById("msg");
 
   form.addEventListener("input", function (e) { var f = e.target.closest(".f"); if (f) f.classList.remove("bad"); });
@@ -469,6 +470,8 @@ footer a:hover{color:var(--foam)}
         if (!ok) throw new Error();
         form.style.display = "none";
         var nm = document.getElementById("prenom").value.trim(); if (nm) document.getElementById("done-name").textContent = nm;
+        // E-mail de confirmation envoyé par le script Google de gadomi42 (sans bloquer l'affichage)
+        try { fetch(CONFIRM_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ prenom: nm, email: document.getElementById("email").value.trim() }) }).catch(function () {}); } catch (err) {}
         var d = document.getElementById("done"); d.style.display = "block"; d.focus();
       })
       .catch(function () {
