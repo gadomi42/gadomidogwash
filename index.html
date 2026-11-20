@@ -183,6 +183,27 @@ footer a:hover{color:var(--foam)}
 .cta-badge{animation:nudge 4.5s ease-in-out 1.2s infinite}
 @media (prefers-reduced-motion:reduce){.cta-badge{animation:none}}
 @media (max-width:420px){.cta{font-size:19px;gap:12px}.cta-badge{width:62px;height:62px;font-size:19px}}
+
+/* Signup v2: anchored dark band */
+.signup{background:#F4F2F1;color:var(--txt);position:relative;overflow:hidden;border-top:1px solid #E6E3E2}
+.signup::before{content:"";position:absolute;right:-160px;top:-200px;width:560px;height:560px;border-radius:50%;background:#FBE7A6;opacity:.55}
+.signup::after{content:"";position:absolute;left:-120px;bottom:-160px;width:340px;height:340px;border-radius:50%;background:#E6E3E2}
+.signup-in{position:relative;z-index:1;max-width:1180px;padding:96px 24px;align-items:center;gap:64px}
+.signup .section-title{color:var(--ink);font-weight:700;font-size:clamp(32px,3.8vw,50px);line-height:1.02;letter-spacing:-.02em;max-width:15ch;text-wrap:balance}
+.signup-lead{margin:18px 0 0;font-size:18px;max-width:40ch;color:var(--txt)}
+.perks{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:14px}
+.perks li{display:flex;gap:14px;align-items:flex-start;font-size:17px;line-height:1.4}
+.perks b{color:var(--ink);font-weight:600}
+.tick{flex:none;width:28px;height:28px;border-radius:50%;background:var(--yel);position:relative;margin-top:-2px}
+.tick::after{content:"";position:absolute;left:10px;top:6px;width:6px;height:12px;border:solid var(--yel-ink);border-width:0 3px 3px 0;transform:rotate(45deg)}
+.pitch-photo{position:relative;margin:40px 0 0;max-width:480px}
+.pitch-photo img{width:100%;height:auto;aspect-ratio:16/9;box-shadow:0 14px 34px rgba(40,36,34,.16);object-fit:cover;object-position:50% 30%;border-radius:20px;display:block}
+.sticker{position:absolute;right:-22px;top:-26px;width:104px;height:104px;border-radius:50%;background:var(--yel);color:var(--yel-ink);
+  display:grid;place-items:center;font-weight:800;font-size:26px;letter-spacing:-.02em;transform:rotate(10deg);box-shadow:0 10px 24px rgba(0,0,0,.25)}
+.signup .card{border:1px solid #ECEAE9;box-shadow:0 24px 60px rgba(40,36,34,.14);padding:34px 32px 28px}
+.signup .card h2{font-size:28px;font-weight:700}
+.signup .btn{font-size:19px;font-weight:700;padding:17px 22px;box-shadow:0 10px 22px rgba(184,134,0,.3)}
+@media (max-width:900px){.signup-in{padding:64px 18px;gap:36px}.pitch-photo{max-width:none}.sticker{right:-6px;width:88px;height:88px;font-size:22px}}
 </style>
 </head>
 <body>
@@ -239,18 +260,23 @@ footer a:hover{color:var(--foam)}
 
 <section class="signup" aria-labelledby="t-signup">
   <div class="signup-in">
-    <div>
-      <h2 class="section-title" id="t-signup">Soyez parmi les premiers à l'essayer</h2>
-      <p>Laissez votre e-mail : vous serez prévenu dès l'ouverture de la station à Feurs, avec votre premier lavage à moitié prix.</p>
+    <div class="signup-pitch">
+      <h2 class="section-title" id="t-signup">Soyez parmi les premiers à&nbsp;l'essayer</h2>
+      <p class="signup-lead">Inscrivez-vous maintenant : à l'ouverture, vous recevez votre bon pour un premier lavage à moitié prix.</p>
+      <ul class="perks">
+        <li><span class="tick" aria-hidden="true"></span><span><b>−50 % sur votre premier lavage</b>, réservé aux inscrits</span></li>
+        <li><span class="tick" aria-hidden="true"></span><span><b>Prévenu en premier</b> de la date et de l'adresse exacte</span></li>
+        <li><span class="tick" aria-hidden="true"></span><span><b>Un seul e-mail</b>, aucune publicité</span></li>
+      </ul>
+      <figure class="pitch-photo">
+        <img src="assets/chien-lavage.jpg" alt="Un chien mouillé, la langue pendante, pendant son lavage dans un bac en inox" width="768" height="432" loading="lazy">
+        <span class="sticker" aria-hidden="true">−50&nbsp;%</span>
+      </figure>
     </div>
     <div class="card" id="inscription">
       <form id="form" novalidate>
-        <div class="offer">
-          <div class="pct">−50&nbsp;%</div>
-          <p>Sur votre premier lavage si vous vous inscrivez avant l'ouverture.</p>
-        </div>
-        <h2>Être prévenu de l'ouverture</h2>
-        <p class="sub">Un seul message à l'ouverture, avec votre bon de réduction.</p>
+        <h2>Je m'inscris</h2>
+        <p class="sub">30 secondes, et votre bon −50 % est réservé.</p>
 
         <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 
@@ -276,7 +302,7 @@ footer a:hover{color:var(--foam)}
         </fieldset>
         <label class="consent"><input type="checkbox" id="ok" required>J'accepte que Gadomi Dog Wash garde mon e-mail pour me prévenir de l'ouverture. Rien d'autre, et désinscription sur simple demande.</label>
 
-        <button class="btn" id="btn" type="submit">M'inscrire</button>
+        <button class="btn" id="btn" type="submit">Réserver mon −50 %</button>
         <p class="msg" id="msg" role="status" aria-live="polite"></p>
       </form>
       <div class="done" id="done" tabindex="-1">
