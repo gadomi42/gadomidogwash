@@ -95,11 +95,14 @@ fieldset.f{border:0;margin:14px 0 0;padding:0}
 @media (prefers-reduced-motion:reduce){.done-check{animation:none}}
 .signup .card .done h2{margin:24px 0 0;font-size:clamp(28px,2.8vw,34px);font-weight:800;letter-spacing:-.02em;color:var(--ink)}
 .done-lead{margin:6px 0 0;font-size:17px;color:var(--soft)}
+.done-spam{margin:12px auto 0;max-width:400px;font-size:14.5px;line-height:1.4;color:var(--ink);background:#FFF7DB;border-radius:10px;padding:8px 12px}
 .coupon{position:relative;margin:24px auto 0;max-width:380px;display:flex;align-items:center;gap:18px;text-align:left;
   background:#FFF7DB;border:2px dashed #E9B520;border-radius:16px;padding:18px 22px}
 .coupon-pct{font-size:40px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1;white-space:nowrap}
 .coupon-txt b{display:block;color:var(--ink);font-size:17px}
-.coupon-txt span{font-size:14px;color:var(--soft)}
+.coupon-txt span{display:block;font-size:14px;color:var(--soft)}
+.coupon-code{margin-top:6px}
+.coupon-code strong{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px;letter-spacing:.06em;color:var(--ink);background:#fff;border:1px solid #E9B520;border-radius:6px;padding:1px 7px}
 @media (max-width:480px){.coupon{flex-direction:column;gap:6px;text-align:center;padding:16px}.coupon-pct{font-size:44px}}
 .done-next{list-style:none;margin:26px auto 0;padding:0;max-width:380px;text-align:left;display:grid;gap:12px}
 .done-next li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px;line-height:1.4;color:var(--txt)}
@@ -332,9 +335,10 @@ footer a:hover{color:var(--foam)}
         <div class="done-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>
         <h2>C'est noté, <span id="done-name">merci</span> !</h2>
         <p class="done-lead">Votre réduction est réservée. Un e&#8209;mail de confirmation vient de vous être envoyé.</p>
+        <p class="done-spam">Vous ne le voyez pas ? Pensez à regarder dans vos <b>courriers indésirables (spams)</b> et à le marquer comme « non spam ».</p>
         <div class="coupon">
           <div class="coupon-pct">−50&nbsp;%</div>
-          <div class="coupon-txt"><b>Votre premier lavage</b><span>Gadomi Dog Wash · Feurs</span></div>
+          <div class="coupon-txt"><b>Votre premier lavage</b><span>Gadomi Dog Wash · Feurs</span><span class="coupon-code">Bon n° <strong id="done-code"></strong></span></div>
         </div>
         <ul class="done-next">
           <li><span>1</span>Nous vous écrirons dès l'ouverture 2027.</li>
@@ -433,6 +437,12 @@ footer a:hover{color:var(--foam)}
 
   var ACCESS_KEY = "e353c4aa-fe0d-4764-bfd7-7f859975c4a9";
   var ENDPOINT = "https://api.web3forms.com/submit";
+  function bonCode() {
+    var A = "ABCDEFGHJKMNPQRSTUVWXYZ23456789", out = "", r = new Uint32Array(8);
+    (window.crypto || window.msCrypto).getRandomValues(r);
+    for (var i = 0; i < 8; i++) { out += A[r[i] % A.length]; if (i === 3) out += "-"; }
+    return "DW-" + out;
+  }
   var CONFIRM_URL = "https://script.google.com/macros/s/AKfycbygUDOiwaLu8BShoBFkIR1r9pckQ-j9xXf9V6B6KGRKIti1mooue_u7hE9vrMIZ2N28/exec";
   var form = document.getElementById("form"), btn = document.getElementById("btn"), msg = document.getElementById("msg");
 
@@ -451,6 +461,7 @@ footer a:hover{color:var(--foam)}
     if (!document.getElementById("ok").checked) { msg.textContent = "Cochez la case d'accord pour qu'on puisse vous prévenir."; msg.className = "msg err"; return; }
 
     var taille = form.querySelector("input[name=taille]:checked");
+    var code = bonCode();
     var data = {
       access_key: ACCESS_KEY,
       subject: "Inscription Dog Wash : " + document.getElementById("prenom").value.trim() + " (" + document.getElementById("commune").value.trim() + ")",
@@ -459,7 +470,8 @@ footer a:hover{color:var(--foam)}
       "Prénom": document.getElementById("prenom").value.trim(),
       "email": document.getElementById("email").value.trim(),
       "Commune": document.getElementById("commune").value.trim(),
-      "Taille du chien": taille ? taille.value : "—"
+      "Taille du chien": taille ? taille.value : "—",
+      "Code bon": code
     };
     if (form.botcheck.checked) data.botcheck = true;
 
@@ -470,8 +482,9 @@ footer a:hover{color:var(--foam)}
         if (!ok) throw new Error();
         form.style.display = "none";
         var nm = document.getElementById("prenom").value.trim(); if (nm) document.getElementById("done-name").textContent = nm;
+        document.getElementById("done-code").textContent = code;
         // E-mail de confirmation envoyé par le script Google de gadomi42 (sans bloquer l'affichage)
-        try { fetch(CONFIRM_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ prenom: nm, email: document.getElementById("email").value.trim() }) }).catch(function () {}); } catch (err) {}
+        try { fetch(CONFIRM_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ prenom: nm, email: document.getElementById("email").value.trim(), code: code }) }).catch(function () {}); } catch (err) {}
         var d = document.getElementById("done"); d.style.display = "block"; d.focus();
       })
       .catch(function () {
