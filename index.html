@@ -109,6 +109,10 @@ fieldset.f{border:0;margin:14px 0 0;padding:0}
 @media (max-width:480px){.coupon{flex-direction:column;gap:6px;text-align:center;padding:16px}.coupon-pct{font-size:44px}}
 .done-next{list-style:none;margin:26px auto 0;padding:0;max-width:380px;text-align:left;display:grid;gap:12px}
 .done-next li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px;line-height:1.4;color:var(--txt)}
+.dl-bon{display:inline-flex;align-items:center;gap:10px;margin:16px auto 0;font:inherit;font-size:16px;font-weight:600;color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:999px;padding:11px 22px;cursor:pointer;transition:background-color .15s,color .15s}
+.dl-bon:hover{background:var(--ink);color:#fff}
+.dl-ico{width:18px;height:18px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 4v11M7 10l5 5 5-5M5 20h14'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 4v11M7 10l5 5 5-5M5 20h14'/%3E%3C/svg%3E") center/contain no-repeat}
+.done-next li b{color:var(--ink);font-weight:600}
 .done-next li span{flex:none;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;font-weight:700;display:grid;place-items:center;margin-top:-1px}
 
 /* Steps */
@@ -354,10 +358,11 @@ footer a:hover{color:var(--foam)}
           <div class="coupon-pct">−50&nbsp;%</div>
           <div class="coupon-txt"><b>Votre premier lavage</b><span>Gadomi Dog Wash · Feurs</span><span class="coupon-code">Bon n° <strong id="done-code"></strong></span></div>
         </div>
+        <button class="dl-bon" type="button" id="dl-bon"><span class="dl-ico" aria-hidden="true"></span>Télécharger mon bon</button>
         <ul class="done-next">
-          <li><span>1</span>Nous vous écrirons dès l'ouverture 2027.</li>
-          <li><span>2</span>Vous recevez votre bon −50 % dans cet e&#8209;mail.</li>
-          <li><span>3</span>Vous venez laver votre chien quand vous voulez, 7j/7.</li>
+          <li><span>1</span><div><b>Conservez l'e&#8209;mail de confirmation</b> : il fait office de bon. Vous pouvez aussi télécharger votre bon ou en faire une capture d'écran.</div></li>
+          <li><span>2</span><div><b>Nous vous prévenons dès l'ouverture</b>, en 2027.</div></li>
+          <li><span>3</span><div><b>À la station</b>, présentez votre numéro de bon pour profiter de −50&nbsp;%.</div></li>
         </ul>
       </div>
     </div>
@@ -457,6 +462,34 @@ footer a:hover{color:var(--foam)}
     for (var i = 0; i < 8; i++) { out += A[r[i] % A.length]; if (i === 3) out += "-"; }
     return "DW-" + out;
   }
+  function drawBon(prenom, code) {
+    var W = 1200, H = 675, c = document.createElement("canvas"); c.width = W; c.height = H;
+    var x = c.getContext("2d"), F = '"Outfit", system-ui, sans-serif';
+    x.fillStyle = "#F4F2F1"; x.fillRect(0, 0, W, H);
+    function rr(px, py, w, h, r) { x.beginPath(); x.moveTo(px + r, py); x.arcTo(px + w, py, px + w, py + h, r); x.arcTo(px + w, py + h, px, py + h, r); x.arcTo(px, py + h, px, py, r); x.arcTo(px, py, px + w, py, r); x.closePath(); }
+    x.fillStyle = "#fff"; rr(40, 40, W - 80, H - 80, 36); x.fill();
+    x.fillStyle = "#FFF7DB"; rr(90, 190, W - 180, 280, 28); x.fill();
+    x.setLineDash([16, 12]); x.lineWidth = 4; x.strokeStyle = "#E9B520"; rr(90, 190, W - 180, 280, 28); x.stroke(); x.setLineDash([]);
+    x.fillStyle = "#16302E"; x.textBaseline = "alphabetic";
+    x.font = "700 40px " + F; x.fillText("Gadomi Dog Wash · Feurs", 90, 130);
+    x.font = "400 26px " + F; x.fillStyle = "#5B6B69"; x.fillText(prenom ? "Bon réservé pour " + prenom : "Bon de réduction", 90, 168);
+    x.fillStyle = "#16302E"; x.font = "800 150px " + F; x.fillText("−50 %", 140, 385);
+    x.font = "700 40px " + F; x.fillText("Votre premier lavage", 650, 290);
+    x.font = "400 26px " + F; x.fillStyle = "#5B6B69"; x.fillText("Numéro de bon", 650, 345);
+    x.fillStyle = "#fff"; rr(645, 365, 420, 70, 14); x.fill(); x.lineWidth = 3; x.strokeStyle = "#E9B520"; rr(645, 365, 420, 70, 14); x.stroke();
+    x.fillStyle = "#16302E"; x.font = "700 40px ui-monospace, Menlo, Consolas, monospace"; x.fillText(code, 668, 414);
+    x.fillStyle = "#3A4644"; x.font = "400 26px " + F;
+    x.fillText("À la station, présentez votre numéro de bon pour profiter de −50 %.", 90, 530);
+    x.fillStyle = "#5B6B69"; x.font = "400 22px " + F;
+    x.fillText("Bon personnel, valable une seule fois · gadomi42.github.io/gadomidogwash", 90, 575);
+    return c;
+  }
+  document.getElementById("dl-bon").addEventListener("click", function () {
+    var code = document.getElementById("done-code").textContent, nm = document.getElementById("prenom").value.trim();
+    var c = drawBon(nm, code), a = document.createElement("a");
+    a.download = "Bon-Gadomi-Dog-Wash-" + code + ".png"; a.href = c.toDataURL("image/png");
+    document.body.appendChild(a); a.click(); a.remove();
+  });
   var CONFIRM_URL = "https://script.google.com/macros/s/AKfycbygUDOiwaLu8BShoBFkIR1r9pckQ-j9xXf9V6B6KGRKIti1mooue_u7hE9vrMIZ2N28/exec";
   var form = document.getElementById("form"), btn = document.getElementById("btn"), msg = document.getElementById("msg");
 
