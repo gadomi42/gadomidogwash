@@ -86,9 +86,24 @@ fieldset.f{border:0;margin:14px 0 0;padding:0}
 .btn:disabled{opacity:.6;cursor:wait}
 .msg{margin:12px 0 0;font-size:14.5px;min-height:1px}
 .msg.err{color:var(--err)}
-.done{display:none;text-align:center;padding:18px 4px}
-.done h2{font-size:24px}
-.done p{margin:10px 0 0;color:var(--soft)}
+.done{display:none;text-align:center;padding:34px 4px 6px}
+.done:focus{outline:none}
+.done-check{width:76px;height:76px;margin:0 auto;border-radius:50%;background:var(--yel);color:var(--ink);display:grid;place-items:center;
+  box-shadow:0 0 0 10px #FBEFC6;animation:pop .5s cubic-bezier(.2,1.4,.4,1) both}
+.done-check svg{width:38px;height:38px}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){.done-check{animation:none}}
+.signup .card .done h2{margin:24px 0 0;font-size:clamp(28px,2.8vw,34px);font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.done-lead{margin:6px 0 0;font-size:17px;color:var(--soft)}
+.coupon{position:relative;margin:24px auto 0;max-width:380px;display:flex;align-items:center;gap:18px;text-align:left;
+  background:#FFF7DB;border:2px dashed #E9B520;border-radius:16px;padding:18px 22px}
+.coupon-pct{font-size:40px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1;white-space:nowrap}
+.coupon-txt b{display:block;color:var(--ink);font-size:17px}
+.coupon-txt span{font-size:14px;color:var(--soft)}
+@media (max-width:480px){.coupon{flex-direction:column;gap:6px;text-align:center;padding:16px}.coupon-pct{font-size:44px}}
+.done-next{list-style:none;margin:26px auto 0;padding:0;max-width:380px;text-align:left;display:grid;gap:12px}
+.done-next li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px;line-height:1.4;color:var(--txt)}
+.done-next li span{flex:none;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;font-weight:700;display:grid;place-items:center;margin-top:-1px}
 
 /* Steps */
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
@@ -314,8 +329,18 @@ footer a:hover{color:var(--foam)}
         <p class="msg" id="msg" role="status" aria-live="polite"></p>
       </form>
       <div class="done" id="done" tabindex="-1">
-        <h2>C'est noté, merci !</h2>
-        <p>Vous recevrez un e-mail à l'ouverture de la station, avec votre premier lavage à moitié prix.</p>
+        <div class="done-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>
+        <h2>C'est noté, <span id="done-name">merci</span> !</h2>
+        <p class="done-lead">Votre réduction est réservée.</p>
+        <div class="coupon">
+          <div class="coupon-pct">−50&nbsp;%</div>
+          <div class="coupon-txt"><b>Votre premier lavage</b><span>Gadomi Dog Wash · Feurs</span></div>
+        </div>
+        <ul class="done-next">
+          <li><span>1</span>Nous vous écrirons dès l'ouverture 2027.</li>
+          <li><span>2</span>Vous recevez votre bon −50 % dans cet e&#8209;mail.</li>
+          <li><span>3</span>Vous venez laver votre chien quand vous voulez, 7j/7.</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -443,6 +468,7 @@ footer a:hover{color:var(--foam)}
       .then(function (ok) {
         if (!ok) throw new Error();
         form.style.display = "none";
+        var nm = document.getElementById("prenom").value.trim(); if (nm) document.getElementById("done-name").textContent = nm;
         var d = document.getElementById("done"); d.style.display = "block"; d.focus();
       })
       .catch(function () {
