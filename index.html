@@ -68,7 +68,7 @@ a{color:inherit}
 .card .sub{margin:6px 0 18px;font-size:15.5px;color:var(--soft)}
 .f{margin-top:14px}
 .f label,.f legend{display:block;font-size:15px;font-weight:500;color:var(--ink);margin-bottom:6px;padding:0}
-.f input[type=text],.f input[type=email]{width:100%;font:inherit;font-size:16px;color:var(--ink);padding:12px 14px;border:1.5px solid #C9D3D1;border-radius:10px;background:#fff}
+.f input[type=text],.f input[type=email],.f input[type=tel]{width:100%;font:inherit;font-size:16px;color:var(--ink);padding:12px 14px;border:1.5px solid #C9D3D1;border-radius:10px;background:#fff}
 .f input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(245,184,46,.45)}
 .f.bad input{border-color:var(--err)}
 fieldset.f{border:0;margin:14px 0 0;padding:0}
@@ -78,6 +78,9 @@ fieldset.f{border:0;margin:14px 0 0;padding:0}
 .sizes input{position:absolute;opacity:0;pointer-events:none}
 .sizes label:has(input:checked){border-color:var(--teal);background:#E8F0EE;box-shadow:inset 0 0 0 1px var(--teal)}
 .sizes label:has(input:focus-visible){outline:3px solid var(--yel);outline-offset:2px}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+@media (max-width:420px){.f-row{grid-template-columns:1fr}}
+.hint{margin:6px 0 0;font-size:13px;color:var(--soft);line-height:1.35}
 .consent{display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:14px;color:var(--soft);line-height:1.4}
 .consent input{margin-top:3px;width:18px;height:18px;accent-color:var(--teal);flex:none}
 .hp{position:absolute;left:-9999px}
@@ -306,13 +309,24 @@ footer a:hover{color:var(--foam)}
 
         <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-        <div class="f">
-          <label for="prenom">Prénom</label>
-          <input type="text" id="prenom" name="prenom" autocomplete="given-name" required>
+        <div class="f-row">
+          <div class="f">
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" name="prenom" autocomplete="given-name" required>
+          </div>
+          <div class="f">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" autocomplete="family-name" required>
+          </div>
         </div>
         <div class="f">
           <label for="email">E-mail</label>
           <input type="email" id="email" name="email" autocomplete="email" inputmode="email" required>
+        </div>
+        <div class="f">
+          <label for="tel">Téléphone portable</label>
+          <input type="tel" id="tel" name="tel" autocomplete="tel" inputmode="tel" placeholder="06 12 34 56 78" required aria-describedby="tel-hint">
+          <p class="hint" id="tel-hint">Pour vous prévenir par SMS de l'ouverture et sécuriser votre bon (un bon par personne).</p>
         </div>
         <div class="f">
           <label for="commune">Commune</label>
@@ -326,7 +340,7 @@ footer a:hover{color:var(--foam)}
             <label><input type="radio" name="taille" value="Grand">Grand<small>plus de 25 kg</small></label>
           </div>
         </fieldset>
-        <label class="consent"><input type="checkbox" id="ok" required>J'accepte que Gadomi Dog Wash garde mon e-mail pour me prévenir de l'ouverture. Rien d'autre, et désinscription sur simple demande.</label>
+        <label class="consent"><input type="checkbox" id="ok" required><span>J'accepte que Gadomi Dog Wash conserve mes coordonnées pour me prévenir de l'ouverture et gérer mon bon. Elles ne sont jamais transmises et sont supprimées après l'utilisation du bon, ou sur simple demande. <a href="confidentialite.html" target="_blank" rel="noopener">En savoir plus</a></span></label>
 
         <button class="btn" id="btn" type="submit">Réserver mon −50 %</button>
         <p class="msg" id="msg" role="status" aria-live="polite"></p>
@@ -452,23 +466,32 @@ footer a:hover{color:var(--foam)}
     e.preventDefault();
     msg.textContent = ""; msg.className = "msg";
     var missing = [];
-    ["prenom", "email", "commune"].forEach(function (id) {
-      var el = document.getElementById(id), bad = !el.value.trim() || (id === "email" && !/^\S+@\S+\.\S+$/.test(el.value.trim()));
+    function telFr(v) {
+      var d = String(v || "").replace(/[\s.\-()]/g, "");
+      if (/^\+33[67]\d{8}$/.test(d)) d = "0" + d.slice(3);
+      if (/^0033[67]\d{8}$/.test(d)) d = "0" + d.slice(4);
+      return /^0[67]\d{8}$/.test(d) ? d.replace(/(\d{2})(?=\d)/g, "$1 ") : "";
+    }
+    ["prenom", "nom", "email", "tel", "commune"].forEach(function (id) {
+      var el = document.getElementById(id), v = el.value.trim();
+      var bad = !v || (id === "email" && !/^\S+@\S+\.\S+$/.test(v)) || (id === "tel" && !telFr(v));
       el.closest(".f").classList.toggle("bad", bad);
       if (bad) missing.push(el);
     });
-    if (missing.length) { msg.textContent = "Indiquez votre prénom, un e-mail valide et votre commune."; msg.className = "msg err"; missing[0].focus(); return; }
+    if (missing.length) { msg.textContent = missing[0].id === "tel" && missing[0].value.trim() ? "Indiquez un numéro de portable valide (06 ou 07, 10 chiffres)." : "Remplissez votre prénom, votre nom, un e-mail valide, votre portable et votre commune."; msg.className = "msg err"; missing[0].focus(); return; }
     if (!document.getElementById("ok").checked) { msg.textContent = "Cochez la case d'accord pour qu'on puisse vous prévenir."; msg.className = "msg err"; return; }
 
     var taille = form.querySelector("input[name=taille]:checked");
     var code = bonCode();
     var data = {
       access_key: ACCESS_KEY,
-      subject: "Inscription Dog Wash : " + document.getElementById("prenom").value.trim() + " (" + document.getElementById("commune").value.trim() + ")",
+      subject: "Inscription Dog Wash : " + document.getElementById("prenom").value.trim() + " " + document.getElementById("nom").value.trim() + " (" + document.getElementById("commune").value.trim() + ")",
       from_name: "Gadomi Dog Wash · page d'inscription",
       "Type": "Inscription ouverture Dog Wash",
       "Prénom": document.getElementById("prenom").value.trim(),
+      "Nom": document.getElementById("nom").value.trim(),
       "email": document.getElementById("email").value.trim(),
+      "Téléphone": telFr(document.getElementById("tel").value),
       "Commune": document.getElementById("commune").value.trim(),
       "Taille du chien": taille ? taille.value : "—",
       "Code bon": code
