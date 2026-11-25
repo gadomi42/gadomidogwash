@@ -172,17 +172,25 @@ fieldset.f{border:0;margin:14px 0 0;padding:0}
 .qa p{margin:0;padding:0 22px 22px;max-width:62ch;color:var(--txt)}
 @media (prefers-reduced-motion:reduce){.qa summary::after{transition:none}}
 
-/* Gadomi42 clients */
-.band{background:var(--teal-2);color:#D5DEDC}
-.band-in{max-width:1120px;margin:0 auto;padding:40px 24px;display:flex;gap:28px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-.band p{margin:0;max-width:60ch}
-.band b{color:var(--foam);font-weight:600}
-.band a.link{color:var(--yel);font-weight:600;text-decoration:none;border-bottom:1.5px solid currentColor;padding-bottom:1px}
-
-footer{background:var(--teal);color:#A9BCB8;font-size:14.5px}
-.foot{max-width:1120px;margin:0 auto;padding:28px 24px;display:flex;gap:12px 28px;flex-wrap:wrap;justify-content:space-between}
+/* Footer (Gadomi42 offer + site footer) */
+footer{background:var(--teal);color:#A9BCB8;font-size:15px}
 footer a{color:#D5DEDC;text-decoration:none}
 footer a:hover{color:var(--foam)}
+.foot{max-width:1120px;margin:0 auto;padding:56px 24px 0}
+.offer{display:flex;align-items:center;justify-content:space-between;gap:20px 32px;flex-wrap:wrap;background:var(--teal-2);border:1px solid var(--teal-line);border-radius:24px;padding:26px 28px}
+.offer p{margin:0;max-width:52ch;color:#D5DEDC;font-size:17px;line-height:1.5}
+.offer b{color:var(--foam);font-weight:600}
+.offer-gift{flex:none;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--yel);color:var(--yel-ink);font-weight:800;font-size:13px;letter-spacing:-.01em;line-height:1;text-align:center}
+.offer-txt{display:flex;align-items:center;gap:18px}
+.offer .btn-yel{display:inline-block;background:var(--yel);color:var(--yel-ink);font-weight:600;font-size:16px;border-radius:999px;padding:12px 24px;transition:background-color .15s}
+.offer .btn-yel:hover{background:var(--yel-h);color:var(--yel-ink)}
+.foot-main{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr);gap:32px;padding:48px 0 40px}
+.foot-logo{width:96px;height:auto;filter:brightness(0) invert(1);opacity:.95}
+.foot-brand p{margin:16px 0 0;max-width:34ch;line-height:1.55}
+.foot h3{margin:0 0 14px;color:var(--foam);font-size:16px;font-weight:600}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.foot-mail{color:var(--yel)!important;font-weight:600;border-bottom:1.5px solid currentColor;padding-bottom:1px}
+.foot-bottom{border-top:1px solid var(--teal-line);padding:20px 0 28px;display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wrap;font-size:14px;color:#8FA6A2}
 
 @media (max-width:900px){
   .hero-in{grid-template-columns:1fr;gap:8px;padding:0 18px 36px;min-height:0}
@@ -193,7 +201,11 @@ footer a:hover{color:var(--foam)}
   .logo{width:92px}
   .hero h1{margin-top:22px}
   .signup-in{grid-template-columns:1fr;gap:28px;padding:56px 18px}
-  .wrap,.band-in,.foot{padding-left:18px;padding-right:18px}
+  .wrap,.foot{padding-left:18px;padding-right:18px}
+  .foot{padding-top:40px}
+  .offer{padding:22px 20px}
+  .foot-main{grid-template-columns:1fr 1fr;gap:28px 20px;padding:40px 0 32px}
+  .foot-brand{grid-column:1/-1}
   .steps{padding:64px 0 24px}
   .step-cards{grid-template-columns:1fr;gap:16px;margin-top:32px}
   .step{padding:22px 22px 24px}
@@ -509,18 +521,43 @@ footer a:hover{color:var(--foam)}
     </div>
   </section>
 
-  <section class="band" aria-label="Clients Gadomi42">
-    <div class="band-in">
-      <p>Vous faites déjà garder votre animal par <b>Gadomi42</b> ? Votre <b>premier lavage sera offert</b> à l'ouverture.</p>
-      <a class="link" href="#inscription">Je m'inscris</a>
-    </div>
-  </section>
 </main>
 
 <footer>
   <div class="foot">
-    <span>Gadomi Dog Wash, Feurs (42110). Un service de Gadomi42, garde d'animaux à domicile.</span>
-    <a href="mailto:gadomi42@gmail.com">gadomi42@gmail.com</a>
+    <div class="offer">
+      <div class="offer-txt">
+        <span class="offer-gift" aria-hidden="true">Offert</span>
+        <p>Vous faites déjà garder votre animal par <b>Gadomi42</b> ? Votre <b>premier lavage sera offert</b> à l'ouverture.</p>
+      </div>
+      <a class="btn-yel" href="#inscription">Je m'inscris</a>
+    </div>
+    <div class="foot-main">
+      <div class="foot-brand">
+        <img class="foot-logo" src="assets/logo-gadomi-dogwash.png?v=2" alt="Gadomi Dog Wash" width="96" height="96">
+        <p>Station de lavage pour chien en libre-service à Feurs (42110). Un service de Gadomi42, garde d'animaux à domicile.</p>
+      </div>
+      <nav aria-label="Pied de page">
+        <h3>La station</h3>
+        <ul>
+          <li><a href="#t-steps">Comment ça marche</a></li>
+          <li><a href="#t-details">Équipements</a></li>
+          <li><a href="#t-faq">Questions fréquentes</a></li>
+          <li><a href="#inscription">Réserver mon −50 %</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a class="foot-mail" href="mailto:gadomi42@gmail.com">gadomi42@gmail.com</a></li>
+          <li>Feurs (42110), Loire</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Gadomi Dog Wash</span>
+      <a href="confidentialite.html">Vos données personnelles</a>
+    </div>
   </div>
 </footer>
 
