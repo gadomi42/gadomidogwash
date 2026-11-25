@@ -172,11 +172,22 @@ fieldset.f{border:0;margin:14px 0 0;padding:0}
 .qa p{margin:0;padding:0 22px 22px;max-width:62ch;color:var(--txt)}
 @media (prefers-reduced-motion:reduce){.qa summary::after{transition:none}}
 
+/* Gadomi42 offer band */
+.g42{background:#fff;padding:48px 24px 0}
+.g42-in{max-width:1072px;margin:0 auto;display:flex;align-items:center;gap:24px;background:var(--teal-2);border-radius:24px;padding:28px 34px;position:relative;overflow:hidden;box-shadow:0 18px 40px rgba(22,48,46,.18)}
+.stamp{flex:none;width:100px;height:100px;border-radius:50%;background:var(--yel);display:grid;place-content:center;text-align:center;color:var(--yel-ink);transform:rotate(-10deg);box-shadow:0 8px 16px rgba(0,0,0,.3),inset 0 0 0 5px var(--yel),inset 0 0 0 7px var(--yel-ink);line-height:1}
+.stamp small{font-size:12px;font-weight:600}
+.stamp strong{font-size:22px;font-weight:800;margin:3px 0;letter-spacing:-.01em}
+.g42 p{margin:0;font-size:clamp(18px,1.8vw,22px);line-height:1.45;color:#D5DEDC;position:relative;z-index:1}
+.g42 b{color:var(--foam);font-weight:700}
+.g42 b.y{color:var(--yel)}
+@media (max-width:900px){.g42{padding:36px 18px 0}.g42-in{padding:22px 20px;gap:16px}.stamp{width:84px;height:84px}.stamp small{font-size:10.5px}.stamp strong{font-size:18px}}
+
 /* Footer (Gadomi42 offer + site footer) */
 footer{background:var(--teal);color:#A9BCB8;font-size:15px}
 footer a{color:#D5DEDC;text-decoration:none}
 footer a:hover{color:var(--foam)}
-.foot{max-width:1120px;margin:0 auto;padding:56px 24px 0}
+.foot{max-width:1120px;margin:0 auto;padding:8px 24px 0}
 .offer{display:flex;align-items:center;justify-content:space-between;gap:20px 32px;flex-wrap:wrap;background:var(--teal-2);border:1px solid var(--teal-line);border-radius:24px;padding:26px 28px}
 .offer p{margin:0;max-width:60ch;color:#D5DEDC;font-size:17px;line-height:1.5}
 .offer b{color:var(--foam);font-weight:600}
@@ -202,7 +213,7 @@ footer a:hover{color:var(--foam)}
   .hero h1{margin-top:22px}
   .signup-in{grid-template-columns:1fr;gap:28px;padding:56px 18px}
   .wrap,.foot{padding-left:18px;padding-right:18px}
-  .foot{padding-top:40px}
+  .foot{padding-top:0}
   .offer{padding:22px 20px}
   .foot-main{grid-template-columns:1fr 1fr;gap:28px 20px;padding:40px 0 32px}
   .foot-brand{grid-column:1/-1}
@@ -427,6 +438,13 @@ footer a:hover{color:var(--foam)}
   </div>
 </section>
 
+<section class="g42" aria-label="Clients Gadomi42">
+  <div class="g42-in">
+    <span class="stamp" aria-hidden="true"><small>1er lavage</small><strong>Offert</strong><small>Gadomi42</small></span>
+    <p>Vous êtes client <b>Gadomi42 garde d'animaux à domicile</b>&nbsp;?<br>Votre <b class="y">premier lavage sera offert</b> à l'ouverture.</p>
+  </div>
+</section>
+
 <main>
   <section class="steps" aria-labelledby="t-steps">
     <div class="wrap">
@@ -525,12 +543,6 @@ footer a:hover{color:var(--foam)}
 
 <footer>
   <div class="foot">
-    <div class="offer">
-      <div class="offer-txt">
-        <span class="offer-gift" aria-hidden="true">Offert</span>
-        <p>Vous êtes client <b>Gadomi42 garde d'animaux à domicile</b>&nbsp;?<br>Votre <b>premier lavage sera offert</b> à l'ouverture.</p>
-      </div>
-    </div>
     <div class="foot-main">
       <div class="foot-brand">
         <img class="foot-logo" src="assets/logo-gadomi-dogwash.png?v=2" alt="Gadomi Dog Wash" width="96" height="96">
